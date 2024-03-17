@@ -7,11 +7,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="/start">Dashboard</a>
+          <a class="nav-link active" routerLink="/start">Dashboard</a>
         </li>
         @if (!userLoginOn) {
           <li class="nav-item">
-            <a class="nav-link" href="/login">Log In</a>
+            <a class="nav-link" routerLink="/login">Log In</a>
           </li>
         } @else {
           <li class="nav-item">
