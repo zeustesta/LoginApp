@@ -1,1 +1,6 @@
-<p>dashboard works!</p>
+<app-nav></app-nav>
+@if (!userLoginOn) {
+  <p>Usuario no autenticado.</p>
+} @else {
+  <p>Usuario autenticado</p>
+}
