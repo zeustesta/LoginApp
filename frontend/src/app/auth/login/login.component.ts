@@ -1,25 +1,48 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from '../../services/auth/login.service';
+import { LoginRequest } from '../../services/auth/loginRequest';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.initForm();
   }
 
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
   initForm(): void {
     this.loginForm = this.fb.group({
-      email: [''],
-      password: ['']
+      email: ['example@gmail.com', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     });
+  }
+
+  login() {
+    if (this.loginForm.valid) {
+      this.loginService.login(this.loginForm.value as LoginRequest);
+      this.loginForm.reset();
+      this.router.navigateByUrl('/start');
+    } else {
+      this.loginForm.markAllAsTouched();
+      alert('No se pudo logear');
+    }
   }
 }

@@ -1,11 +1,27 @@
 <form [formGroup]="loginForm">
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email">
+    <label for="loginEmail" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="loginEmail" formControlName="email">
+    @if (email?.invalid && (email?.dirty || email?.touched)) {
+      <div class="text-danger">
+        @if (email?.errors?.['required']) {
+          Email is required.
+        } @else if (email?.errors?.['email']) {
+          Email must be valid.
+        }
+      </div>    
+    }
   </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+  <div class="mb-3 password-input">
+    <label for="loginPassword" class="form-label">Password</label>
+    <input type="password" class="form-control" id="loginPassword" formControlName="password">
+    @if (password?.invalid && (password?.dirty || password?.touched)) {
+      <div class="text-danger">
+        @if (password?.errors?.['required']) {
+          Password is required.
+        }
+      </div>    
+    }
   </div>
-  <button type="submit" class="btn btn-primary">Log In</button>
+  <button type="submit" class="btn btn-primary" (click)="login()">Log In</button>
 </form>
