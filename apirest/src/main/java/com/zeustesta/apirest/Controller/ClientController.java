@@ -1,5 +1,6 @@
 package com.zeustesta.apirest.Controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -19,32 +20,40 @@ import com.zeustesta.apirest.Service.ClientService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping
+@RequestMapping("/client")
 @RequiredArgsConstructor
 public class ClientController {
   private final ClientService clientServ;
 
   @ResponseStatus(HttpStatus.CREATED)
-  @PostMapping("/client/createClient")
+  @PostMapping("/createClient")
   public ResponseEntity<String> createClient(@RequestBody Client newClient) {
     clientServ.createClient(newClient);
     return ResponseEntity.ok("Client created successfully");
   }
 
-  @GetMapping("/client/getClientById/{clientId}")
+  @ResponseStatus(HttpStatus.FOUND)
+  @GetMapping("/getClients")
+  public List<Client> findAll() {
+    return clientServ.findAll();
+  }
+
+  @ResponseStatus(HttpStatus.FOUND)
+  @GetMapping("/getClientById/{clientId}")
   public Client findById(@PathVariable UUID clientId) {
     Client founded = clientServ.findById(clientId);
     return founded;
   }
 
-  @GetMapping("/client/getClientByEmail/{clientEmail}")
+  @ResponseStatus(HttpStatus.FOUND)
+  @GetMapping("/getClientByEmail/{clientEmail}")
   public Client findByEmail(@PathVariable String clientEmail) {
     Client founded = clientServ.findByEmail(clientEmail);
     return founded;
   }
 
   @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
-  @DeleteMapping("/client/deleteClientByEmail/{clientId}")
+  @DeleteMapping("/deleteClientByEmail/{clientId}")
   public ResponseEntity<String> createClient(@PathVariable UUID clientId) {
     clientServ.deleteClient(clientId);
     return ResponseEntity.ok("Client deleted successfully");

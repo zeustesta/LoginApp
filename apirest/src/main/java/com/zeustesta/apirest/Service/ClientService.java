@@ -1,5 +1,6 @@
 package com.zeustesta.apirest.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -15,11 +16,19 @@ public class ClientService {
   private final ClientRepository clientRep;
 
   public void createClient(Client newClient) {
-    clientRep.save(newClient);
+    if (newClient != null) {
+      clientRep.save(newClient);
+    }
   }
 
   public void deleteClient(UUID userId) {
-    clientRep.deleteById(userId);
+    if (userId != null) {
+      clientRep.deleteById(userId);
+    }
+  }
+
+  public List<Client> findAll() {
+    return clientRep.findAll();
   }
 
   public Client findById(UUID userId) {

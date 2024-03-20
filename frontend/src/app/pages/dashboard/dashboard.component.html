@@ -3,4 +3,9 @@
   <p>Usuario no autenticado.</p>
 } @else {
   <p>Usuario autenticado</p>
+  <div class="m-3 bg-primary text-center">
+    <p>Nombre: {{userData?.firstName}}</p>
+    <p>Apellido: {{userData?.lastName}}</p>
+    <p>Email: {{userData?.email}}</p>
+  </div>
 }

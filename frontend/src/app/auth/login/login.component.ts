@@ -14,6 +14,7 @@ import { LoginRequest } from '../../services/auth/loginRequest';
 })
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
+  loginError: string = '';
   constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {
@@ -37,9 +38,20 @@ export class LoginComponent implements OnInit{
 
   login() {
     if (this.loginForm.valid) {
-      this.loginService.login(this.loginForm.value as LoginRequest);
-      this.loginForm.reset();
-      this.router.navigateByUrl('/start');
+      this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
+        next: (userData) => {
+          console.log(userData);
+        }, 
+        error: (errorData) => {
+          console.log(errorData);
+          this.loginError = errorData;
+        },
+        complete: () => {
+          console.log('Login completo');
+          this.loginForm.reset();
+          this.router.navigateByUrl('/start');
+        }
+      });
     } else {
       this.loginForm.markAllAsTouched();
       alert('No se pudo logear');
