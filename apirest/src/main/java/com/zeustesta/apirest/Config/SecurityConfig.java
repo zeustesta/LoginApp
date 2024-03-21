@@ -2,10 +2,14 @@ package com.zeustesta.apirest.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.zeustesta.apirest.Jwt.JwtAuthenticacionFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+  private final JwtAuthenticacionFilter jwtAuthenticacionFilter;
+  private final AuthenticationProvider authProvider;
   
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -24,7 +30,11 @@ public class SecurityConfig {
         authRequest
           .requestMatchers("/auth/**").permitAll()
           .anyRequest().authenticated())
-      .formLogin(withDefaults())
-      .build();
+          .sessionManagement(sessionManager ->
+            sessionManager
+              .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+          .authenticationProvider(authProvider)
+          .addFilterBefore(jwtAuthenticacionFilter, UsernamePasswordAuthenticationFilter.class)
+          .build();
   }
 }

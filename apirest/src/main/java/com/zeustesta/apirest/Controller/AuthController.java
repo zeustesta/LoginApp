@@ -1,7 +1,12 @@
-package com.zeustesta.apirest.Auth;
+package com.zeustesta.apirest.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.zeustesta.apirest.Auth.AuthResponse;
+import com.zeustesta.apirest.Auth.LoginRequest;
+import com.zeustesta.apirest.Auth.RegisterRequest;
+import com.zeustesta.apirest.Service.AuthService;
 
 import lombok.RequiredArgsConstructor;
 

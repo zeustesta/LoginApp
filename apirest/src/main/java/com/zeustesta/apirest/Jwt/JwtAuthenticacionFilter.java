@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class JwtAuthenticacionFilter extends OncePerRequestFilter{
 
+  @SuppressWarnings("null")
   @Override
   protected void doFilterInternal(@NonNull HttpServletRequest request, 
                                   @NonNull HttpServletResponse response, 

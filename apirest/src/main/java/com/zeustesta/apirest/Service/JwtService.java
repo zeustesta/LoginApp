@@ -1,7 +1,8 @@
-package com.zeustesta.apirest.Jwt;
+package com.zeustesta.apirest.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +18,7 @@ public class JwtService {
   public static final String SECRET_KEY = "bd976708cf429dac62c15d98502baebcbdab93b0231b22aa9acee870a6da0e27";
 
   public String getToken(UserDetails userDetails) {
-    return null;
+    return getToken(new HashMap<>(), userDetails);
   }
 
   public String getToken(Map<String, Object> extraClaims, UserDetails user) {
@@ -27,7 +28,7 @@ public class JwtService {
       .setSubject(user.getUsername())
       .setIssuedAt(new Date(System.currentTimeMillis()))
       .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_TOKEN))
-      .signWith(null)
+      .signWith(getKey())
       .compact();
   }
 

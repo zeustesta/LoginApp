@@ -12,5 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface ClientRepository extends JpaRepository<Client, UUID>{
   Optional<Client> findByUserId(UUID userId);
   Optional<Client> findByEmail(String email);
+  @SuppressWarnings("null")
   List<Client> findAll();
 }
