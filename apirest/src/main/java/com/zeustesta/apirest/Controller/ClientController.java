@@ -1,6 +1,7 @@
 package com.zeustesta.apirest.Controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -40,16 +41,14 @@ public class ClientController {
 
   @ResponseStatus(HttpStatus.FOUND)
   @GetMapping("/getClientById/{clientId}")
-  public Client findById(@PathVariable UUID clientId) {
-    Client founded = clientServ.findById(clientId);
-    return founded;
+  public Optional<Client> findById(@PathVariable UUID clientId) {
+    return clientServ.findById(clientId);
   }
 
   @ResponseStatus(HttpStatus.FOUND)
   @GetMapping("/getClientByEmail/{clientEmail}")
-  public Client findByEmail(@PathVariable String clientEmail) {
-    Client founded = clientServ.findByEmail(clientEmail);
-    return founded;
+  public Optional<Client> findByEmail(@PathVariable String clientEmail) {
+    return clientServ.findByEmail(clientEmail);
   }
 
   @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)

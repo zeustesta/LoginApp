@@ -1,6 +1,7 @@
 package com.zeustesta.apirest.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -31,21 +32,11 @@ public class ClientService {
     return clientRep.findAll();
   }
 
-  public Client findById(UUID userId) {
-    Client found = clientRep.findByUserId(userId);
-    if (found != null) {
-      return found;
-    } else {
-      return null;
-    }
+  public Optional<Client> findById(UUID userId) {
+    return clientRep.findByUserId(userId);
   }
 
-  public Client findByEmail(String userEmail) {
-    Client found = clientRep.findByEmail(userEmail);
-    if (found != null) {
-      return found;
-    } else {
-      return null;
-    }
+  public Optional<Client> findByEmail(String userEmail) {
+    return clientRep.findByEmail(userEmail);
   }
 }
