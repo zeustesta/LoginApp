@@ -26,13 +26,6 @@ import lombok.RequiredArgsConstructor;
 public class ClientController {
   private final ClientService clientServ;
 
-  @ResponseStatus(HttpStatus.CREATED)
-  @PostMapping("/createClient")
-  public ResponseEntity<String> createClient(@RequestBody Client newClient) {
-    clientServ.createClient(newClient);
-    return ResponseEntity.ok("Client created successfully");
-  }
-
   @ResponseStatus(HttpStatus.FOUND)
   @GetMapping("/getClients")
   public List<Client> findAll() {
@@ -52,7 +45,7 @@ public class ClientController {
   }
 
   @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
-  @DeleteMapping("/deleteClientByEmail/{clientId}")
+  @DeleteMapping("/deleteClientById/{clientId}")
   public ResponseEntity<String> createClient(@PathVariable UUID clientId) {
     clientServ.deleteClient(clientId);
     return ResponseEntity.ok("Client deleted successfully");

@@ -33,7 +33,6 @@ public class AuthService {
       .build(); 
   }
 
-  @SuppressWarnings("null")
   public AuthResponse register(RegisterRequest registerRequest) {
     Client newClient = Client.builder()
       .email(registerRequest.getEmail())
