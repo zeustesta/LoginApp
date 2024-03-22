@@ -1,5 +1,8 @@
 package com.zeustesta.apirest.Service;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +21,16 @@ public class AuthService {
   private final JwtService jwtService;
   private final ClientRepository cliRep;
   private final PasswordEncoder passwordEncoder;
+  private final AuthenticationManager authManager;
 
   public AuthResponse login(LoginRequest login) {
-    return null;
+    authManager.authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
+    UserDetails client = cliRep.findByEmail(login.getEmail()).orElseThrow();
+    String token = jwtService.getToken(client);
+
+    return AuthResponse.builder()
+      .token(token)
+      .build(); 
   }
 
   @SuppressWarnings("null")
@@ -32,7 +42,9 @@ public class AuthService {
       .lastName(registerRequest.getLastName())
       .role(Role.USER)
       .build();
+
     cliRep.save(newClient);
+
     return AuthResponse.builder()
       .token(jwtService.getToken(newClient))
       .build();
