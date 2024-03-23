@@ -1,4 +1,4 @@
-package com.zeustesta.apirest.Controller;
+package com.zeustesta.apirest.Demo;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
