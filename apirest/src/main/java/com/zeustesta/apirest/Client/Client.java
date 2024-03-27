@@ -26,19 +26,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "USER")
+@Table(name = "client")
 public class Client implements UserDetails{
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
-  @Column(name = "USER_ID")
+  @Column(name = "client_id")
   private UUID userId;
+  @Column(name = "first_name")
   private String firstName;
+  @Column(name = "last_name")
   private String lastName;
-  @Column(name = "USER_EMAIL")
+  @Column(name = "client_email", unique = true)
   private String email;
-  @Column(name = "USER_PASSWORD")
+  @Column(name = "client_password")
   private String password;
-  @Column(name = "USER_ROLE")
+  @Column(name = "client_role")
   @Enumerated(EnumType.STRING)
   private Role role;
 

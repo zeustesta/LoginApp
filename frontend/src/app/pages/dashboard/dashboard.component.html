@@ -1,11 +1,15 @@
 <app-nav></app-nav>
 @if (!userLoginOn) {
-  <p>Usuario no autenticado.</p>
+  <p class="alert alert-danger">Usuario no autenticado.</p>
 } @else {
-  <p>Usuario autenticado</p>
-  <div class="m-3 bg-primary text-center">
-    <p>Nombre: {{userData?.firstName}}</p>
-    <p>Apellido: {{userData?.lastName}}</p>
-    <p>Email: {{userData?.email}}</p>
-  </div>
+  <p class="alert alert-success">Usuario autenticado</p>
 }
+
+<div class="card">
+  <div class="card-header">
+    Datos Personales
+  </div>
+  <div class="card-body m-0">
+    <app-personal-details></app-personal-details>
+  </div>
+</div>

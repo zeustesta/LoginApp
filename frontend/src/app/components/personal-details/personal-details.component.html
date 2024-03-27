@@ -1,0 +1,8 @@
+@if (errorMessage.length != 0) {
+  <p class="text-danger">{{errorMessage}}</p>
+}
+<div class="m-3 bg-primary text-center">
+  <p><b> Nombre: </b> {{user?.firstName}}</p>
+  <p><b> Apellido: </b> {{user?.lastName}}</p>
+  <p><b> Email: </b> {{user?.email}}</p>
+</div>

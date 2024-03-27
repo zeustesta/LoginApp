@@ -13,11 +13,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, UUID>{
-  Optional<Client> findByEmail(String email);
+  public Optional<Client> findByEmail(String email);
+
+  public List<Client> findAll();
+
   @Modifying()
-  @Query("update Client c set c.first_name=:firstName, c.last_name=:lastName where c.USER_ID = id")
-  void updateClient(@Param(value = "id") UUID id, 
-                    @Param(value = "firstName") String firstName, 
-                    @Param(value = "lastName") String lastName
+  @Query(value = "UPDATE Client c SET c.first_name =:firstName, c.last_name =:lastName WHERE c.client_id =:id", nativeQuery = true)
+  public void updateClient(@Param(value = "id") UUID client_id, @Param(value = "firstName") String first_name, @Param(value = "lastName") String last_name
   );
 }

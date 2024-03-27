@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginRequest } from './loginRequest';
+import { LoginRequest } from '../../utils/loginRequest';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environment/environment';
 import { Observable, catchError, throwError, BehaviorSubject, tap } from 'rxjs';
@@ -9,7 +9,7 @@ import { User } from '../../utils/user';
   providedIn: 'root'
 })
 export class LoginService {
-  private apiUrl: string = environment.apiUrl; 
+  private apiUrl: string = environment.urlHost; 
   private pathUrl: string = '/client';
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUserData: BehaviorSubject<User> = new BehaviorSubject<User>({id: '0'});
