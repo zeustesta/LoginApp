@@ -10,9 +10,7 @@ import { environment } from '../../../environment/environment';
 export class UserService {
   baseUrl: String = environment.urlApi + '/client';
 
-  constructor(private http: HttpClient) {
-    
-  }
+  constructor(private http: HttpClient) {}
 
   getUser (id: String): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/${id}`).pipe(
@@ -22,9 +20,9 @@ export class UserService {
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
-      console.error("Se ha producido un error: " + error.error);
+      console.error("Se ha producido un error: " + error);
     } else {
-      console.error("Codigo de estado retornado: " + error.status + " Error: " + error.message);
+      console.error("Error: " + error);
     }
     return throwError(() => new Error("Algo salio mal"));
   }

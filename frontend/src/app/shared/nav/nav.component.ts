@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LoginService } from '../../services/auth/login.service';
 
@@ -9,7 +9,7 @@ import { LoginService } from '../../services/auth/login.service';
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })
-export class NavComponent implements OnInit, OnDestroy{
+export class NavComponent implements OnInit {
   userLoginOn: boolean = false;
   loginService = inject(LoginService);
 
@@ -24,7 +24,7 @@ export class NavComponent implements OnInit, OnDestroy{
     })
   }
 
-  ngOnDestroy(): void {
-      this.loginService.currentUserLoginOn.unsubscribe();
+  logOut() {
+    this.loginService.logout();
   }
 }

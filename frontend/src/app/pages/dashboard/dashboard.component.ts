@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NavComponent } from '../../shared/nav/nav.component';
 import { LoginService } from '../../services/auth/login.service';
-import { User } from '../../utils/user';
 import { PersonalDetailsComponent } from '../../components/personal-details/personal-details.component';
 
 @Component({
@@ -11,9 +10,8 @@ import { PersonalDetailsComponent } from '../../components/personal-details/pers
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit, OnDestroy{
+export class DashboardComponent implements OnInit {
   userLoginOn: boolean = false;
-  userData?: User;
   loginService = inject(LoginService);
   
   ngOnInit(): void {
@@ -22,15 +20,5 @@ export class DashboardComponent implements OnInit, OnDestroy{
         this.userLoginOn = userLoginOn;
       } 
     })
-
-    this.loginService.currentUserData.subscribe({
-      next: (userData) => {
-        this.userData = userData;
-      }
-    })
-  }
-  ngOnDestroy(): void {
-    this.loginService.currentUserData.unsubscribe();
-    this.loginService.currentUserLoginOn.unsubscribe();
   }
 }

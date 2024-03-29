@@ -15,20 +15,19 @@ export class PersonalDetailsComponent implements OnInit{
   user?: User;
 
   constructor (private userServ: UserService) {
-
   }
 
   ngOnInit(): void {
-      this.userServ.getUser(environment.userId).subscribe({
-        next: (userData) => {
-          this.user = userData;
-        },
-        error: (errorData) => {
-          this.errorMessage = errorData
-        },
-        complete: () => {
-          console.info('User data OK');
-        }
-      })
+    this.userServ.getUser(environment.userId).subscribe({
+      next: (userData) => {
+        this.user = userData;
+      },
+      error: (errorData) => {
+        this.errorMessage = errorData
+      },
+      complete: () => {
+        console.info('User data OK');
+      }
+    })
   }
 }
