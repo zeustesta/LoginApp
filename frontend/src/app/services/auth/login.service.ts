@@ -33,7 +33,7 @@ export class LoginService {
     } else {
       console.error("Codigo de estado retornado: " + error.status + " Error: " + error.message);
     }
-    return throwError(() => new Error("Algo salio mal"));
+    return throwError(() => new Error("Algo salio mal: " + error.message));
   }
 
   get userData(): Observable<User> {

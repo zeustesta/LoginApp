@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit{
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
           console.log(userData);
+          this.router.navigateByUrl('/start');
         }, 
         error: (errorData) => {
           console.log(errorData);
@@ -49,7 +50,6 @@ export class LoginComponent implements OnInit{
         complete: () => {
           console.log('Login completo');
           this.loginForm.reset();
-          this.router.navigateByUrl('/start');
         }
       });
     } else {
