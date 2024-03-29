@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit{
         },
         complete: () => {
           console.log('Login completo');
-          this.loginForm.reset();
         }
       });
     } else {
