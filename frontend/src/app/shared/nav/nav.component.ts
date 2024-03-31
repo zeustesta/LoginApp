@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LoginService } from '../../services/auth/login.service';
+import { LoginService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-nav',

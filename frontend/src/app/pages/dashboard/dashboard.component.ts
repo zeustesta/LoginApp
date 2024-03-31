@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NavComponent } from '../../shared/nav/nav.component';
-import { LoginService } from '../../services/auth/login.service';
+import { LoginService } from '../../services/auth/auth.service';
 import { User } from '../../utils/user';
 import { PersonalDetailsComponent } from '../../components/personal-details/personal-details.component';
 
