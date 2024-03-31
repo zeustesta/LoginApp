@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LoginService } from '../../services/auth/login.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,13 +11,13 @@ import { LoginService } from '../../services/auth/login.service';
 })
 export class NavComponent implements OnInit {
   userLoginOn: boolean = false;
-  loginService = inject(LoginService);
+  authService = inject(AuthService);
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.loginService.currentUserLoginOn.subscribe({
+    this.authService.currentUserLoginOn.subscribe({
       next: (userLoginOn) => {
         this.userLoginOn = userLoginOn;
       } 
@@ -25,6 +25,6 @@ export class NavComponent implements OnInit {
   }
 
   logOut() {
-    this.loginService.logout();
+    this.authService.logout();
   }
 }

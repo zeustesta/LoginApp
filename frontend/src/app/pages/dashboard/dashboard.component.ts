@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NavComponent } from '../../shared/nav/nav.component';
-import { LoginService } from '../../services/auth/login.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { User } from '../../utils/user';
 import { PersonalDetailsComponent } from '../../components/personal-details/personal-details.component';
 
 @Component({
@@ -12,10 +13,10 @@ import { PersonalDetailsComponent } from '../../components/personal-details/pers
 })
 export class DashboardComponent implements OnInit {
   userLoginOn: boolean = false;
-  loginService = inject(LoginService);
+  authService = inject(AuthService);
   
   ngOnInit(): void {
-    this.loginService.currentUserLoginOn.subscribe({
+    this.authService.currentUserLoginOn.subscribe({
       next: (userLoginOn) => {
         this.userLoginOn = userLoginOn;
       } 
