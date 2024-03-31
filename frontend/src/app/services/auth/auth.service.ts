@@ -8,7 +8,7 @@ import { User } from '../../utils/user';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
   private apiUrl: string = environment.urlHost; 
   private pathUrl: string = '/client';
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

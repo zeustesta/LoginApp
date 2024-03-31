@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { LoginRequest } from '../../utils/loginRequest';
 
 @Component({
@@ -15,7 +15,7 @@ import { LoginRequest } from '../../utils/loginRequest';
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   loginError: string = '';
-  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) {}
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit{
 
   login() {
     if (this.loginForm.valid) {
-      this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
+      this.authService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
           console.log(userData);
         }, 
