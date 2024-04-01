@@ -21,14 +21,6 @@ export class LoginComponent implements OnInit{
     this.initForm();
   }
 
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
-
   initForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -55,5 +47,13 @@ export class LoginComponent implements OnInit{
       this.loginForm.markAllAsTouched();
       alert('No se pudo logear');
     }
+  }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 }

@@ -6,22 +6,33 @@
   <div class="input-items">
     <div class="item">
       <label for="name">Name:</label>
-      <input name="name" type="text" placeholder="Name">
+      <input class="form-control" formControlName="registerName" id="name" type="text" placeholder="Name">
+      @if (name?.invalid && (name?.dirty || name?.touched)) {
+        <div class="warning">
+          @if (name?.errors?.['required']) {
+            Name is required.
+          } @else {
+            Hola.
+          }
+        </div>    
+      }      
     </div>
   
     <div class="item">
       <label for="lastName">Last Name:</label>
-      <input name="lastName" type="text" placeholder="Last name">
+      <input class="form-control" formControlName="registerLastName" id="lastName" type="text" placeholder="Last name" >
     </div>
   
     <div class="item">
       <label for="email">Email:</label>
-      <input name="email" type="email" placeholder="Email">
+      <input class="form-control" formControlName="registerEmail" id="email" type="email" placeholder="Email">
     </div>
   
     <div class="item">
       <label for="password">Password:</label>
-      <input name="password" type="password" placeholder="Password">
+      <input class="form-control" formControlName="registerPassword" id="password" type="password" placeholder="Password">
     </div>
+
+    <button type="submit" (click)="register()">Sign Up</button>
   </div>
 </form>
