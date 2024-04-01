@@ -13,9 +13,7 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent implements OnInit{
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-
-  }
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -23,15 +21,22 @@ export class RegisterComponent implements OnInit{
 
   initForm() {
     this.registerForm = this.fb.group({
-      name: ["", [Validators.required]],
-      lastName: ["", [Validators.required]],
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required]]
+      name: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator]]
     })
   }
 
   register() {
+    console.log('Registrando')
+  }
 
+  passwordValidator(control: any) {
+    if (!/(?=.*[a-z])(?=.*[A-Z])/.test(control.value)) {
+      return { passwordInvalid: true };
+    }
+    return null;
   }
 
   get name() {

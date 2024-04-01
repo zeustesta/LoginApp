@@ -22,7 +22,7 @@ form .item {
   margin: 5px 15px;
 }
 
-form button[type="submit"] {
+form button#submitBtn {
   display: block;
   margin: 0 auto;
   background-color: #146017; 
