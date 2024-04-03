@@ -2,7 +2,6 @@ package com.zeustesta.apirest.Auth;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +20,18 @@ public class AuthService {
   private final PasswordEncoder passwordEncoder;
   private final AuthenticationManager authManager;
 
-  public AuthResponse login(LoginRequest login) {
+  public LoginResponse login(LoginRequest login) {
     authManager.authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
-    UserDetails client = cliRep.findByEmail(login.getEmail()).orElseThrow();
-    String token = jwtService.getToken(client);
+    Client clientInfo = cliRep.findByEmail(login.getEmail()).orElseThrow();
+    String token = jwtService.getToken(clientInfo);
 
-    return AuthResponse.builder()
+    return LoginResponse.builder()
       .token(token)
+      .userId(clientInfo.getUserId())
       .build(); 
   }
 
-  public AuthResponse register(RegisterRequest registerRequest) {
+  public RegisterResponse register(RegisterRequest registerRequest) {
     Client newClient = Client.builder()
       .email(registerRequest.getEmail())
       .password(passwordEncoder.encode(registerRequest.getPassword()))
@@ -42,8 +42,8 @@ public class AuthService {
 
     cliRep.save(newClient);
 
-    return AuthResponse.builder()
-      .token(jwtService.getToken(newClient))
+    return RegisterResponse.builder()
+      .message("Correctly registered")
       .build();
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of, throwError } from 'rxjs';
 import { User } from '../../utils/user';
 import { environment } from '../../../environment/environment';
 
@@ -8,14 +8,19 @@ import { environment } from '../../../environment/environment';
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl: String = environment.urlApi + '/client';
+  private baseUrl: String = environment.urlApi + '/client';
+  private currentId: String = "";
 
   constructor(private http: HttpClient) {}
 
-  getUser (id: String): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/${id}`).pipe(
-      catchError(this.handleError)
-    );
+  getUser(): Observable<User> {
+    if (this.currentId == "") {
+      return of({ id: '', firstName: '', lastName: '', email: '' });
+    } else {
+      return this.http.get<User>(`${this.baseUrl}/${this.currentId}`).pipe(
+        catchError(this.handleError)
+      );
+    }
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -25,5 +30,9 @@ export class UserService {
       console.error("Error: " + error);
     }
     return throwError(() => new Error("Algo salio mal"));
+  }
+
+  set userId(userId: String) {
+    this.currentId = userId;
   }
 }

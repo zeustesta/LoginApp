@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit{
   login() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value as LoginRequest).subscribe({
-        next: (userData) => {
-          console.log(userData);
+        next: () => {
           this.router.navigateByUrl('/start');
         }, 
         error: (errorData) => {
@@ -40,12 +39,12 @@ export class LoginComponent implements OnInit{
           this.loginError = errorData;
         },
         complete: () => {
-          console.log('Login completo');
+          console.log('Login completed');
         }
       });
     } else {
       this.loginForm.markAllAsTouched();
-      alert('No se pudo logear');
+      alert('Failed to log in');
     }
   }
 

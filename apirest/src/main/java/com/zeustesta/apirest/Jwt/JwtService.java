@@ -9,6 +9,8 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.zeustesta.apirest.Client.Client;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -23,7 +25,8 @@ public class JwtService {
     return extractClaim(token, Claims::getSubject);
   }
 
-  public String getToken(UserDetails userDetails) {
+  public String getToken(Client client) {
+    UserDetails userDetails = client;
     return getToken(new HashMap<>(), userDetails);
   }
 

@@ -5,6 +5,7 @@ import { environment } from '../../../environment/environment';
 import { Observable, catchError, throwError, BehaviorSubject, tap, map } from 'rxjs';
 import { User } from '../../utils/user';
 import { RegisterRequest } from '../../utils/registerRequest';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +13,26 @@ import { RegisterRequest } from '../../utils/registerRequest';
 export class AuthService {
   private apiUrl: string = `${environment.urlHost}/auth`; 
   currentUserLoginOn = new BehaviorSubject<boolean>(false);
-  currentUserData = new BehaviorSubject<String>("");
+  currentUserToken = new BehaviorSubject<String>("");
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
     
   }
 
   getStorage() {
     this.currentUserLoginOn = new BehaviorSubject<boolean>((sessionStorage.getItem('token') != null))
-    this.currentUserData = new BehaviorSubject<String>(sessionStorage.getItem('token') || "");
+    this.currentUserToken = new BehaviorSubject<String>(sessionStorage.getItem('token') || "");
   }
 
   login(credentials: LoginRequest): Observable<User> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
       tap(userData => {
         sessionStorage.setItem('token', userData);
-        this.currentUserData.next(userData.token);
+        this.currentUserToken.next(userData.token);
         this.currentUserLoginOn.next(true);
+        this.userService.userId = userData.userId;
       }),
-      map((userData) => userData.token),
+      map((userData) => userData),
       catchError(this.handleError)
     );
   }
@@ -38,10 +40,13 @@ export class AuthService {
   logout(): void {
     sessionStorage.removeItem('token');
     this.currentUserLoginOn.next(false);
+    this.userService.userId = "";
   }
 
-  register(newUser: RegisterRequest) {
-    
+  register(newUser: RegisterRequest): Observable<String> {
+    return this.http.post<String>(`${this.apiUrl}/register`, newUser).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -53,15 +58,11 @@ export class AuthService {
     return throwError(() => new Error("Algo salio mal: " + error.message));
   }
 
-  get userData(): Observable<String> {
-    return this.currentUserData.asObservable();
-  }
-
   get userLoginOn(): Observable<boolean>{
     return this.currentUserLoginOn.asObservable();
   }
 
   get userToken(): String {
-    return this.currentUserData.value;
+    return this.currentUserToken.value;
   }
 }

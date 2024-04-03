@@ -1,31 +1,17 @@
-<!-- @if (errorMessage.length != 0) {
-  <p class="text-danger">{{errorMessage}}</p>
-}
-<div class="m-3 bg-primary text-center">
-  <p><b> Nombre: </b> {{user?.firstName}}</p>
-  <p><b> Apellido: </b> {{user?.lastName}}</p>
-  <p><b> Email: </b> {{user?.email}}</p>
-</div> -->
-@if (errorMessage.length != 0) {
-  <p class="text-danger">{{errorMessage}}</p>
-}
-<div class="container mt-3">
-  <div class="card bg-primary text-white">
-    <div class="card-body">
-      <h5 class="card-title text-center">Detalles Personales</h5>
-      <div class="row">
-        <div class="col-md-6">
-          <p class="card-text"><b>Nombre:</b> {{user?.firstName}}</p>
-        </div>
-        <div class="col-md-6">
-          <p class="card-text"><b>Apellido:</b> {{user?.lastName}}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <p class="card-text"><b>Email:</b> {{user?.email}}</p>
-        </div>
-      </div>
-    </div>
+<div class="user-details">
+  <div class="detail">
+    <span class="label">Nombre:</span>
+    <span class="value">{{ user?.firstName }}</span>
   </div>
+  <div class="detail">
+    <span class="label">Apellido:</span>
+    <span class="value">{{ user?.lastName }}</span>
+  </div>
+  <div class="detail">
+    <span class="label">Email:</span>
+    <span class="value">{{ user?.email }}</span>
+  </div>
+
+  <button class="edit-button" (click)="editUser()"><i class='bx bxs-edit-alt'></i></button>
 </div>
+

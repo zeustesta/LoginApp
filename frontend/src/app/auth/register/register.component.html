@@ -6,10 +6,10 @@
   <div class="input-items">
     <div class="item">
       <label for="name">Name:</label>
-      <input class="form-control" formControlName="name" id="name" type="text" placeholder="Name">
-      @if (name?.invalid && (name?.dirty || name?.touched)) {
+      <input class="form-control" formControlName="firstName" id="name" type="text" placeholder="Name">
+      @if (firstName?.invalid && (firstName?.dirty || firstName?.touched)) {
         <div class="warning">
-          @if (name?.errors?.['required']) {
+          @if (firstName?.errors?.['required']) {
             Name is required.
           }
         </div>    
@@ -58,6 +58,6 @@
       }   
     </div>
 
-    <button id="submitBtn" type="submit" [disabled]="registerForm.invalid" (click)="register()">Sign Up</button>
+    <button id="submitBtn" type="submit" (click)="register()">Sign Up</button>
   </div>
 </form>
