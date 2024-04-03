@@ -9,7 +9,7 @@ import { environment } from '../../../environment/environment';
 })
 export class UserService {
   private baseUrl: String = environment.urlApi + '/client';
-  private currentId: String = "";
+  private currentId: String | null = "";
 
   constructor(private http: HttpClient) {}
 

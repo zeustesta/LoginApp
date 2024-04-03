@@ -1,4 +1,4 @@
-package com.zeustesta.apirest.Jwt;
+package com.zeustesta.apirest.configuration;
 
 import java.io.IOException;
 
@@ -11,6 +11,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.zeustesta.apirest.service.JwtService;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.servlet.FilterChain;

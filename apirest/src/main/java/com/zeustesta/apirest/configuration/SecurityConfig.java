@@ -1,4 +1,4 @@
-package com.zeustesta.apirest.Config;
+package com.zeustesta.apirest.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.zeustesta.apirest.Jwt.JwtAuthenticacionFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +29,6 @@ public class SecurityConfig {
         authRequest
           .requestMatchers(HttpMethod.GET).permitAll()
           .requestMatchers(HttpMethod.OPTIONS).permitAll()
-          // .requestMatchers(HttpMethod.PUT).authenticated()
           .requestMatchers("/auth/**").permitAll()
           .anyRequest().authenticated())
           .sessionManagement(sessionManager ->

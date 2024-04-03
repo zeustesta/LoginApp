@@ -1,14 +1,17 @@
-package com.zeustesta.apirest.Auth;
+package com.zeustesta.apirest.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.zeustesta.apirest.Client.Client;
-import com.zeustesta.apirest.Client.ClientRepository;
-import com.zeustesta.apirest.Client.Role;
-import com.zeustesta.apirest.Jwt.JwtService;
+import com.zeustesta.apirest.auth.LoginRequest;
+import com.zeustesta.apirest.auth.LoginResponse;
+import com.zeustesta.apirest.auth.RegisterRequest;
+import com.zeustesta.apirest.auth.RegisterResponse;
+import com.zeustesta.apirest.model.Client;
+import com.zeustesta.apirest.model.Role;
+import com.zeustesta.apirest.repository.ClientRepository;
 
 import lombok.RequiredArgsConstructor;
 

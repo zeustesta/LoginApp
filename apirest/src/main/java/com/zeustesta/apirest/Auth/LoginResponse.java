@@ -1,4 +1,4 @@
-package com.zeustesta.apirest.Auth;
+package com.zeustesta.apirest.auth;
 
 import java.util.UUID;
 

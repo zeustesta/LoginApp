@@ -1,10 +1,17 @@
-package com.zeustesta.apirest.Client;
+package com.zeustesta.apirest.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+
+import com.zeustesta.apirest.client.ClientRequest;
+import com.zeustesta.apirest.client.ClientResponse;
+import com.zeustesta.apirest.dto.ClientDTO;
+import com.zeustesta.apirest.model.Client;
+import com.zeustesta.apirest.model.Role;
+import com.zeustesta.apirest.repository.ClientRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

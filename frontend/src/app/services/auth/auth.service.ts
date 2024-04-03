@@ -16,11 +16,11 @@ export class AuthService {
   currentUserToken = new BehaviorSubject<String>("");
 
   constructor(private http: HttpClient, private userService: UserService) {
-    
+    this.getStorage();
   }
 
   getStorage() {
-    this.currentUserLoginOn = new BehaviorSubject<boolean>((sessionStorage.getItem('token') != null))
+    this.currentUserLoginOn = new BehaviorSubject<boolean>((sessionStorage.getItem('token') != null));
     this.currentUserToken = new BehaviorSubject<String>(sessionStorage.getItem('token') || "");
   }
 
@@ -40,7 +40,7 @@ export class AuthService {
   logout(): void {
     sessionStorage.removeItem('token');
     this.currentUserLoginOn.next(false);
-    this.userService.userId = "";
+    this.userService.currentId = null;
   }
 
   register(newUser: RegisterRequest): Observable<String> {

@@ -1,4 +1,4 @@
-package com.zeustesta.apirest.Client;
+package com.zeustesta.apirest.dto;
 
 import java.util.UUID;
 

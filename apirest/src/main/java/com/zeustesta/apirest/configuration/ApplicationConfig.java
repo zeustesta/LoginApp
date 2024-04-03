@@ -1,4 +1,4 @@
-package com.zeustesta.apirest.Config;
+package com.zeustesta.apirest.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.zeustesta.apirest.Client.ClientRepository;
+import com.zeustesta.apirest.repository.ClientRepository;
 
 import lombok.RequiredArgsConstructor;
 

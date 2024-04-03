@@ -1,13 +1,13 @@
 <app-nav></app-nav>
 @if (!userLoginOn) {
-  <p class="alert alert-danger">Usuario no autenticado.</p>
+  <p class="alert alert-danger">Unauthenticated user.</p>
 } @else {
-  <p class="alert alert-success">Usuario autenticado</p>
+  <p class="alert alert-success">Authenticated user.</p>
 }
 
 <div class="card">
   <div class="card-header">
-    Datos Personales
+    Personal details:
   </div>
   <div class="card-body m-0">
     <app-personal-details></app-personal-details>

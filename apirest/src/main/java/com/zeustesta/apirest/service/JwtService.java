@@ -1,4 +1,4 @@
-package com.zeustesta.apirest.Jwt;
+package com.zeustesta.apirest.service;
 
 import java.security.Key;
 import java.util.Date;
@@ -9,7 +9,7 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.zeustesta.apirest.Client.Client;
+import com.zeustesta.apirest.model.Client;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

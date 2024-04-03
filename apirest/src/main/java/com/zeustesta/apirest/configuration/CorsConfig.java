@@ -1,4 +1,4 @@
-package com.zeustesta.apirest.Config;
+package com.zeustesta.apirest.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

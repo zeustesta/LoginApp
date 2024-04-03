@@ -1,4 +1,4 @@
-package com.zeustesta.apirest.Client;
+package com.zeustesta.apirest.model;
 
 import java.util.Collection;
 import java.util.List;
