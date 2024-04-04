@@ -67,6 +67,6 @@ public class ClientService {
     
     clientRep.updateClient(client.getUserId(), client.getFirstName(), client.getLastName());
 
-    return new ClientResponse("Usuario registrado correctamente");
+    return new ClientResponse("Usuario actualizado correctamente");
   }
 }

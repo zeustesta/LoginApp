@@ -40,7 +40,6 @@ export class AuthService {
   logout(): void {
     sessionStorage.removeItem('token');
     this.currentUserLoginOn.next(false);
-    this.userService.currentId = null;
   }
 
   register(newUser: RegisterRequest): Observable<String> {

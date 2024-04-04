@@ -23,6 +23,14 @@ export class UserService {
     }
   }
 
+  updateUser(update: User): Observable<String> {
+    update.id = this.currentId!.toString();
+
+    return this.http.put<String>(`${this.baseUrl}/update`, update).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error("Se ha producido un error: " + error);

@@ -12,6 +12,25 @@
     <span class="value">{{ user?.email }}</span>
   </div>
 
-  <button class="edit-button" (click)="editUser()"><i class='bx bxs-edit-alt'></i></button>
+  @if (user !== null && !editing) {
+    <button class="edit-button" (click)="startEditing()">
+      <i class='bx bxs-edit-alt'></i> Editar
+    </button>
+  }
+
+  @if (editing) {
+    <div class="edit-form">
+      <form (submit)="saveChanges()">
+        <label>Nombre:</label>
+        <input type="text" ngModel="editedUser.firstName" name="firstName" required>
+  
+        <label>Apellido:</label>
+        <input type="text" ngModel="editedUser.lastName" name="lastName" required>
+  
+        <button type="submit" (click)="saveChanges()">Guardar</button>
+        <button type="button" (click)="cancelEditing()">Cancelar</button>
+      </form>
+    </div>
+  }
 </div>
 
